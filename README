@@ -1,0 +1,20 @@
+Mercurial: The Definitive Guide
+-------------------------------
+
+Welcome to the source code for the book.  You can clone the definitive
+copy of the source tree using Mercurial as follows:
+
+  hg clone http://hg.serpentine.com/mercurial/book
+
+Here's a top-level tour of interesting directories:
+
+contrib         Miscellaneous scripts
+en              English-language content (DocBook XML format)
+stylesheets     XSLT scripts for generating HTML
+web             Content and comment system for http://hgbook.red-bean.com/
+
+po              PO based translation    Chinese translation
+
+it              Italian translation     DocBook XML format
+es              Spanish translation     old tex format
+ja              Japanese translation    old tex format

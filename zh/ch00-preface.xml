@@ -1,0 +1,229 @@
+<!-- vim: set filetype=docbkxml shiftwidth=2 autoindent expandtab tw=77 : -->
+
+<preface id="chap:preface">
+  <?dbhtml filename="preface.html"?>
+  <title>前言</title>
+
+  <sect1>
+    <title>技术叙述</title>
+
+    <para id="x_72e">多年前，当我试图想别人解释为什么我相信分布式版本控制是
+      如此重要的时候，这还是一个全新的领域，市面上几乎没有任何相关的书籍供人
+      们参考。 </para>
+
+    <para id="x_72f">虽然那时我正在担任一些Mercurial自身相关的工作，我还是选
+      择转向了编写本书这件事上。因为这似乎是推广本工具最有效的方式了，与此同
+      时，也能向人们传播“版本控制天生就该是分布式的”这一理念。基于相同的理由，
+      我选择了自由许可来在线发布本书。</para>
+
+    <para id="x_730">一本好的软件书籍总是倾向于讲一个故事：这是个什么东东？
+      为什么它如此重要？它是如何能帮助我的？我该如何使用它？在这本书中，我会
+      试着回答什么是分布式版本控制，而Mercurial这个工具则是重要的参与部分。 </para>
+  </sect1>
+
+  <sect1>
+    <title>感谢您支持Mercurial</title>
+
+    <para id="x_731"> 您可以通过购买本书的拷贝来支持Mercurial作为开源和自由
+      软件的持续开发，且保证它的自由。O'Reilly Media和我将为把所有版税捐献给
+      软件自由管理机构(<ulink url="http://www.softwarefreedom.org/">
+        http://www.softwarefreedom.org/</ulink>)，该机构致力于为Mercurial和
+      许多其他杰出的开源项目提供文书和法律的支持。
+    </para>
+  </sect1>
+
+  <sect1>
+    <title>致谢</title>
+
+    <para id="x_732">如果没有Mercurial的作者和项目带头人Matt Mackall的努力，
+      这本书根本不可能出现。他得到了来自全世界成百上千的志愿贡献者全力的支
+      持。</para>
+
+    <para id="x_733">我的孩子们，Cian和Ruairi，时刻准备着用精彩又荒唐的男孩
+      游戏中得到放松。我同样要感谢来自我的前妻Shannon的支持。</para>
+
+    <para id="x_734">我的同事和朋友们给我提供了各方面的帮助和支持，我这里所
+      能列举的非常有限：
+      Stephen Hahn, Karyn Ritter, Bonnie Corwin, James
+      Vasile, Matt Norwood, Eben Moglen, Bradley Kuhn, Robert Walsh,
+      Jeremy Fitzhardinge, Rachel Chalmers.</para>
+
+    <para id="x_735">我用了一种很开放的方式编写本书，每当我完成了一个章节，
+      我就在本书的网站上张贴这些章节的草稿。这样读者就用我开发的网站来提交
+      反馈。当我完成了本书写作时，已经有超过100人提交了评论，这个数字真让我
+      感到惊奇，试想一下，当我完成写作时，这个评论系统仅仅诞生了2个月而已。
+    </para>
+
+    <para id="x_736">这里我要着重说一下以下几人，他们贡献了三分之一以上的评
+      论。我感谢他们如此费心和努力的提供了这么详尽的反馈。</para>
+
+    <para id="x_737">Martin Geisler, Damien Cassou, Alexey Bakhirkin, Till
+      Plewe, Dan Himes, Paul Sargent, Gokberk Hamurcu, Matthijs van der
+      Vleuten, Michael Chermside, John Mulligan, Jordi Fita, Jon
+      Parise.</para>
+
+    <para id="x_738">我同样要感谢为我纠错和提出了宝贵建议的这些人</para>
+
+    <para id="x_739">Jeremy W. Sherman, Brian Mearns, Vincent Furia, Iwan
+      Luijks, Billy Edwards, Andreas Sliwka, Paweł Sołyga, Eric
+      Hanchrow, Steve Nicolai, Michał Masłowski, Kevin Fitch, Johan
+      Holmberg, Hal Wine, Volker Simonis, Thomas P Jakobsen, Ted
+      Stresen-Reuter, Stephen Rasku, Raphael Das Gupta, Ned
+      Batchelder, Lou Keeble, Li Linxiao, Kao Cardoso Félix, Joseph
+      Wecker, Jon Prescot, Jon Maken, John Yeary, Jason Harris,
+      Geoffrey Zheng, Fredrik Jonson, Ed Davies, David Zumbrunnen,
+      David Mercer, David Cabana, Ben Karel, Alan Franzoni, Yousry
+      Abdallah, Whitney Young, Vinay Sajip, Tom Towle, Tim Ottinger,
+      Thomas Schraitle, Tero Saarni, Ted Mielczarek, Svetoslav
+      Agafonkin, Shaun Rowland, Rocco Rutte, Polo-Francois Poli,
+      Philip Jenvey, Petr Tesałék, Peter R. Annema, Paul Bonser,
+      Olivier Scherler, Olivier Fournier, Nick Parker, Nick Fabry,
+      Nicholas Guarracino, Mike Driscoll, Mike Coleman, Mietek Bák,
+      Michael Maloney, László Nagy, Kent Johnson, Julio Nobrega, Jord
+      Fita, Jonathan March, Jonas Nockert, Jim Tittsler, Jeduan
+      Cornejo Legorreta, Jan Larres, James Murphy, Henri Wiechers,
+      Hagen Möbius, Gábor Farkas, Fabien Engels, Evert Rol, Evan
+      Willms, Eduardo Felipe Castegnaro, Dennis Decker Jensen, Deniz
+      Dogan, David Smith, Daed Lee, Christine Slotty, Charles Merriam,
+      Guillaume Catto, Brian Dorsey, Bob Nystrom, Benoit Boissinot,
+      Avi Rosenschein, Andrew Watts, Andrew Donkin, Alexey Rodriguez,
+      Ahmed Chaudhary.</para>
+  </sect1>
+
+  <sect1>
+    <title>本书约定</title>
+
+    <para id="x_73a">本书中使用以下的字体约定：</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>斜体</term>
+
+        <listitem>
+          <para id="x_73b">表明新的术语，URL，email地址，文件名以及文件扩展名。
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><literal>等宽字体</literal></term>
+
+          <listitem>
+            <para id="x_73c">用作程序代码，同时也用作在段落中引用程序元素，
+              比如变量或者函数名，数据库，数据类型，环境变量，语句和关键字。</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><userinput>等宽粗体</userinput></term>
+
+          <listitem>
+            <para id="x_73d">表示命令或者需要用户输入的文本。</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><replaceable>等宽斜体</replaceable></term>
+
+          <listitem>
+            <para
+              id="x_73e">表示需要替换成用户提供的数值或者由具体上下文来确定
+              的数值。</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <tip>
+        <para id="x_73f">这个图标表示一个提示，建议或者普通的提醒。</para>
+      </tip>
+
+      <caution>
+        <para id="x_740">这个图标表示一个警告。</para>
+      </caution>
+    </sect1>
+
+    <sect1>
+      <title>使用代码样例</title>
+
+      <para id="x_741">本书是为了让你完成工作的。一般而言，你可以在项目和文
+        档中使用书中的代码。你不用为了确认权限问题而与我们联系，除非你要对代
+        码进行一次明显的转赠。比如，写一个使用了本书中部分代码的程序并不需要
+        与我们申请许可。贩卖或者分发由O'Reilly的书中附带的代码样例光盘则需要
+        向我们申请。在回答一个问题时引用本书内容及书中的代码不需要授权。而在
+        您的产品文档中大量使用本书样例代码则需要授权。
+
+        <para id="x_742">如果您能在使用中标明出处，我们将感激不尽，但是，这
+          完全在于您的决定，而不是必须的。标明出处通常需要标题，作者，出版社
+          和ISBN。比如：
+          ISBN. For example: “<emphasis>Book Title</emphasis> by Some
+          Author. Copyright 2008 O’Reilly Media, Inc.,
+          978-0-596-xxxx-x.”</para>
+
+        <para id="x_743">如果你怀疑你的样例代码使用可能超越了正当使用或者上
+          述授权的范围，请随时与我们联系确认<email>permissions@oreilly.com</email>。
+        </para>
+      </sect1>
+
+      <sect1>
+        <title>Safari® Books Online</title>
+
+        <note role="safarienabled">
+          <para id="x_744">如果你在你钟爱的技术书籍封面上看到了Safari® Books
+            Online的标志，说明本书可以在O'Reilly网络的Safari书库中在线访问。</para>
+        </note>
+
+        <para id="x_745">Safari为您提供比电子书更好的解决方案。它是一个让你
+          可以在数以千计的顶级技术书籍中轻松查询，剪贴代码样例，下载章节和迅
+          速回答您关心的快速， 最新信息的虚拟图书馆。您可以通过以下网址轻松
+          体验：<ulink role="orm:hideurl:ital"
+            url="http://my.safaribooksonline.com/?portal=oreilly">http://my.safaribooksonline.com</ulink></para>
+      </sect1>
+
+      <sect1>
+        <title>如何联系我们</title>
+
+        <para id="x_746">请注明关于本书对出版社的评论和问题：</para>
+
+        <simplelist type="vert">
+          <member>O’Reilly Media, Inc.</member>
+
+          <member>1005 Gravenstein Highway North</member>
+
+          <member>Sebastopol, CA 95472</member>
+
+          <member>800-998-9938 (in the United States or Canada)</member>
+
+          <member>707-829-0515 (international or local)</member>
+
+          <member>707 829-0104 (fax)</member>
+        </simplelist>
+
+        <para id="x_747">我们为本书提供了一个包含勘误清单、样例和其他附加信
+          息的网页，你可以访问以下网址:</para>
+
+        <simplelist type="vert">
+          <member><ulink url="http://www.oreilly.com/catalog/&lt;catalog
+              page&gt;"></ulink></member>
+        </simplelist>
+
+        <remark>别忘了同时更新&lt;url&gt;属性</remark>
+
+        <para id="x_748">对本书发表评论或者询问技术问题，可以发送Email: </para>
+
+        <simplelist type="vert">
+          <member><email>bookquestions@oreilly.com</email></member>
+        </simplelist>
+
+        <para id="x_749">关于更多我们提供的图书、会议，资源中心和和O'Reilly
+          网络，请访问我们的网站：</para>
+
+        <simplelist type="vert">
+          <member><ulink url="http://www.oreilly.com"></ulink></member>
+        </simplelist>
+      </sect1>
+    </preface>
+
+<!--
+local variables: 
+sgml-parent-document: ("00book.xml" "book" "preface")
+end:
+-->

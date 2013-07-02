@@ -1,0 +1,902 @@
+<!-- vim: set filetype=docbkxml shiftwidth=2 autoindent expandtab tw=77 : -->
+
+<chapter id="chap:tour-basic">
+  <?dbhtml filename="a-tour-of-mercurial-the-basics.html"?>
+  <title>Mercurial之旅：基础知识</title>
+
+  <sect1 id="sec:tour:install">
+    <title>安装Mercurial</title>
+
+    <para id="x_1">主流平台上都有预编译的二进制安装包。你可以轻松的
+      在你系统上开始使用Mercurial。</para>
+
+    <sect2>
+      <title>Windows</title>
+
+      <para id="x_c">Windows上Mercurial最好的版本就是TortoiseHg，
+        你可以在<ulink url="http://tortoisehg.org">
+          http://tortoisehg.org</ulink>找到最新版本。这个安装包不需
+        要任何第三方文件，它<quote>开箱即用</quote>。它提供了命令行
+        和图形界面。</para>
+
+    </sect2>
+
+    <sect2>
+      <title>Mac OS X</title>
+
+      <para id="x_a">Lee Cantey发布了Mac OS X下的Mercurial安装文件
+        <ulink url="http://mercurial.berkwood.com">
+          http://mercurial.berkwood.com</ulink>.</para>
+    </sect2>
+
+    <sect2>
+      <title>Linux</title>
+
+      <para id="x_2">由于每个Linux分发版都有一套自己的打包工具，策
+        略和开发频度，很难直接给出一个通用的安装二进制指南。不同的
+        分发版维护者的维护力度会直接影响到你会安装的Mercurial版本。
+      </para>
+
+      <para id="x_3">简单起见，我更倾向于在流行的Linux分发版上，以
+        命令行方式安装Mercurial。大部分分发版都提供了图形安装包管理
+        器，你只需先搜索<literal>mercurial</literal>，然后简单的点击
+        搜索结果就可以安装了。</para>
+
+      <itemizedlist>
+	<listitem><para id="x_4">Ubuntu及Debian:</para>
+	  <programlisting>apt-get install mercurial</programlisting></listitem>
+	<listitem><para id="x_5">Fedora:</para>
+	  <programlisting>yum install mercurial</programlisting></listitem>
+	<listitem><para id="x_715">OpenSUSE:</para>
+	  <programlisting>zypper install mercurial</programlisting></listitem>
+	<listitem><para id="x_6">Gentoo:</para>
+	  <programlisting>emerge mercurial</programlisting></listitem>
+      </itemizedlist>
+
+    </sect2>
+    <sect2>
+      <title>Solaris</title>
+
+      <para id="x_9">SunFreeWare, 网址 <ulink
+	  url="http://www.sunfreeware.com">http://www.sunfreeware.com</ulink>, 
+        提供了预编译的二进制包。</para>
+
+    </sect2>
+
+  </sect1>
+
+  <sect1>
+    <title>让我们开始吧</title>
+
+    <para id="x_e">首先，我们要使用<command role="hg-cmd">hg version
+      </command> 指令来确认我们是否正确安装了Mercurial。实际的版本
+      信息无关紧要，我们只关心这个命令是否能够执行并打印出了些什么。
+    </para>
+
+    &interaction.tour.version;
+
+    <sect2>
+      <title>内建帮助文档</title>
+
+      <para id="x_f">Mercurial提供了内建的帮助系统。当你发现你试图
+        挣扎着回忆起应该怎么执行一条命令时，你会发现它极具价值。如
+        果你完全槑掉了，还可以通过简单的执行<command role="hg-cmd">
+        hg help</command>，它会打印出一份命令列表的简介，并附有每条
+        命令的介绍。如果你想知道某条命令（就像如下所示）的帮助，它
+        会打印出详细信息。</para>
+
+	&interaction.tour.help;
+
+    <para id="x_10">如果你还要更加详尽的信息（通常你不会需要的），
+      你可以执行<command role="hg-cmd">hg help <option
+	      role="hg-opt-global">-v</option></command>来获得。<option
+        role="hg-opt-global">-v</option>选项是 <option 
+        role="hg-opt-global">--verbose</option>选项的缩写，它会让
+      Mercurial打印出比平时更多的信息来。</para>
+    </sect2>
+  </sect1>
+  <sect1>
+    <title>操作仓库</title>
+
+    <para id="x_11">Mercurial的所有一切都发生在<emphasis>仓库</emphasis>
+      之中。一个项目的仓库里包含了那个项目的一切文件，以及那些文件
+      的历史记录。</para>
+
+    <para id="x_12">仓库其实也没有什么特别的神秘之处，它就是你文件
+      系统里一个Mercurial特别对待的目录而已。任何时候只要你喜欢就可
+      以改名或者删除这个目录，无论是使用命令行还是文件浏览器。</para>
+
+    <sect2>
+      <title>创建一个仓库的本地复本</title>
+
+      <para id="x_13"><emphasis>复制</emphasis>一个仓库有一点儿特殊，
+        虽然你可以使用普通的文件复制命令来复制一个仓库，但是最好还是
+        使用Mercurial提供的内建命令来复制仓库。这个命令叫<command 
+        role="hg-cmd">hg clone</command>，因为它能创建一个和已存的仓
+        库完全相同的复本。</para>
+
+      &interaction.tour.clone;
+
+      <para id="x_67c">使用<command role="hg-cmd">hg clone</command>
+        的一个优势就像如上面所见，可以让你联网克隆一个仓库。而且它会
+        记录你是从哪里克隆的，这点在我们试图从另一个仓库抓取新变更时
+        会非常有用。</para>
+
+      <para id="x_14">成功了clone之后，我们会发现一个叫做<filename
+        class="directory">hello</filename>的目录。这个目录包含了一些
+        文件。</para>
+
+      &interaction.tour.ls;
+
+      <para id="x_15">这些文件的内容和历史是和我们clone的仓库中一样的。
+      </para>
+
+      <para id="x_16">每个Mercurial仓库都是完整的，自包含和独立的。它
+        拥有一份自己私有的项目文件和历史的复本。正如我们刚刚说到的，
+        一个复制好的仓库记得它是从哪个仓库复制而来的，但是Mercurial不
+        会那个仓库进行通信，除非你让它这么做。</para>
+
+      <para id="x_17">这意味着因为我们知道这是个不会影响到他人的私有
+        <quote>沙盒</quote>后，我们可以自由的对我们的仓库做任何试验。
+      </para>
+
+    </sect2>
+    <sect2>
+      <title>仓库里有什么？</title>
+
+      <para id="x_18">如果我们朝仓库里更仔细的看一下的话，我们会发现，
+        里面有一个叫做<filename class="directory">.hg</filename>的目
+        录。这里保存着Mercurial所需要的该仓库的元数据。</para>
+
+      &interaction.tour.ls-a;
+
+      <para id="x_19"><filename class="directory">.hg</filename>目录
+        以及它的子目录只对Mercurial有用。而仓库里的其他文件和目录是
+        由您处置的。</para>
+
+      <para id="x_1a">这里介绍一下约定的术语，<filename class="directory">
+        .hg</filename>目录是真正的仓库，而其他所有的文件和目录我们叫
+        它<emphasis>工作目录</emphasis>。一个简单的区分方法是<emphasis>
+        仓库</emphasis>包含了你的项目的<emphasis>历史</emphasis>，而
+        <emphasis>工作目录</emphasis>包含了你项目在某个历史点上的
+        <emphasis>快照</emphasis>。</para>
+
+    </sect2>
+  </sect1>
+  <sect1>
+    <title>历史之旅</title>
+
+    <para id="x_1b">当我们遇到一个全新的，陌生的仓库时，首要之事便是
+      了解它的历史。<command role="hg-cmd">hg log</command>命令会给出
+      这个仓库的一份详尽的变更历史清单。</para>
+
+    &interaction.tour.log;
+
+    <para id="x_1c">这个命令默认只会打印每次变更所记录的摘要信息。用
+      Mercurial的行话来说，我们把这些记录在案的事件叫做<emphasis>变更
+      集</emphasis>，因为它每次可以记录多个文件的变更。</para>
+
+    <para id="x_1d"><command role="hg-cmd">hg log</command>命令所显示
+      记录的各个字段如下所示。</para>
+
+    <itemizedlist>
+      <listitem><para id="x_1e"><literal>changeset</literal>:这个字段
+      是一个数字，然后是一个冒号，接着是一段十六进制字符串。这些是
+      Mercurial的变更集的识别标示。十六进制的字符串是唯一标示：相同的
+      十六进制字符串无论在哪个仓库副本里，都永远代表相同的一次变更。
+      数字是一个相比十六进制字符串精简了以便于书写的标示，不过它不是
+      唯一的：在不同的仓库复本中，相同的数字可能代表了不同的变更集。</para>
+      </listitem>
+      <listitem><para id="x_1f"><literal>user</literal>: 这个字段表示
+      谁创建了这个变更集。这是一个形式自由的字段，不过通常它是由用户名
+      加上邮件地址组成的。</para></listitem>
+      <listitem><para id="x_20"><literal>date</literal>: 代表创建这个变更
+      集的日期和时间，并且附有时区信息。 (The date and time are local
+      to that timezone; they display what time and date it was for the
+	  person who created the changeset.)</para></listitem>
+      <listitem><para id="x_21"><literal>summary</literal>:就是创建者
+      所输入描述的第一行。</para></listitem>
+      <listitem>
+      <para id="x_67d">有些变更集，像上面第一个里面，有一个叫做<literal>
+      tag</literal>的字段。一个tag是另一种通过给变更取一个简单易记的
+      名字来标示变更集的方式。（被标示为<literal>tip</literal>的tag
+      是特殊的：它总是指向仓库里最新的一次变更。）</para></listitem>
+    </itemizedlist>
+
+    <para id="x_22"><command role="hg-cmd">hg log</command>默认情况下
+      输出的完全是一个概要，它遗漏了很多细节。</para>
+
+    <para id="x_23"><xref linkend="fig:tour-basic:history"/>提供了
+      <filename class="directory">hello</filename>仓库的图形化的表现，
+      这样可以更简单的显示出历史是怎么流动的。我们将在本章以及以后一
+      些章节中多次提到此图。</para>
+
+    <figure id="fig:tour-basic:history">
+      <title><filename class="directory">hello</filename>仓库的图形化历史</title>
+      <mediaobject>
+	<imageobject><imagedata fileref="figs/tour-history.png"/></imageobject>
+	<textobject><phrase>XXX add text</phrase></textobject>
+      </mediaobject>
+    </figure>
+
+    <sect2>
+      <title>变更集，版本以及和他人的交流</title>
+
+      <para id="x_25">正如英语是一种混乱得令人发指的语言一样，计算机
+        科学也有着一段术语混乱的光辉历史（为什么该用四个术语来对应各
+        自场合的情况下，却只有一个呢？），版本控制有着各种单词和词组
+        来表示同一件事。如果你和他人在讨论Mercurial的历史，你会发现
+        <quote>变更集</quote>常常被压缩成<quote>变更</quote>或者<quote>
+        cset</quote>（通常在书写时），有时呢变更集其实又是在指<quote>
+        版本</quote>或者<quote>rev</quote></para>
+
+    <para id="x_26">但是不管你在用什么<emphasis>词汇</emphasis>来表示
+      <quote>变更集</quote>这个概念，你用来指向<quote>一个<emphasis>
+      特定的</emphasis>变更集</quote>的<emphasis>标示</emphasis>是非常
+      重要的。回忆一下<command role="hg-cmd">hg log</command>命令输出
+      中的<literal>changeset</literal>字段，它同时用数字和十六进制字符
+      串来标示一个变更集。</para>
+
+    <itemizedlist>
+      <listitem><para id="x_27">版本数字是<emphasis>只在那个仓库中有效
+        的</emphasis>助记标识。</para></listitem>
+      <listitem><para id="x_28">十六进制字符串则是<emphasis>无论在哪个
+        仓库</emphasis>中都指向同一个变更集的<emphasis>永远不变的标示符
+        </emphasis>。</para></listitem>
+    </itemizedlist>
+
+      <para id="x_29">这个区别至关重要。如果你发信给别人讨论<quote>
+        版本33</quote>，那么很大可能他们的版本33<emphasis>并不和你的
+        相同</emphasis>。因为这个数字仅仅是一个仓库中所保存的变更集的
+        一个序号罢了，并不保证其他仓库中所保存的变更集及其顺序都是一
+        致的。三个变更<literal>a，b，c</literal>很容易在一个仓库里标示
+        为<literal>0,1,2</literal>而在另一个标示为<literal>0,2,1</literal>。
+      </para>
+
+      <para id="x_2a">Mercurial使用版本数字仅仅是为了方便。如果你需要
+        和其他人或者为了某个原因（比如说要做一次bug报告）要对某一个变
+        更集做个留档，请使用十六进制标示符。</para>
+
+    </sect2>
+    <sect2>
+      <title>查看特定版本</title>
+
+      <para id="x_2b">你可以使用<option role="hg-opt-log">-r</option>
+        （或<option role="hg-opt-log">--rev</option>）选项来缩减
+        <command role="hg-cmd">hg log</command>命令的输出信息到某一个
+        版本。你不但可以使用版本号或者十六进制标示符，还可以指定任意
+        多的版本。</para>
+
+      &interaction.tour.log-r;
+
+      <para id="x_2c">如果你既想看多个版本的信息，又不想手动一个个输入，
+        你可以使用<emphasis>范围标示</emphasis>，它让你可以表达<quote>
+        我想要查看从<literal>abc</literal>到<literal>def</literal>之间
+        的所有版本，包括这两个版本本身。</quote>
+      
+	&interaction.tour.log.range;
+
+    <para id="x_2d">Mercurial同样也能根据你指定版本的顺序来显示，所
+      以当输入<command role="hg-cmd">hg log -r 2:4</command>时，打印
+      顺序是2,3,4，而输入<command role="hg-cmd">hg log -r 4:2</command>
+      时，则打印4,3,2。</para>
+
+    </sect2>
+    <sect2>
+      <title>更详细信息</title>
+
+      <para id="x_2e">尽管用<command role="hg-cmd">hg log</command>
+        命令打印出的概要信息对你已经很有用了（只要你清楚你要找什么）
+        如果你想确认哪一个变更才是你在找的那个, 你可能会需要一份详尽
+        的变更说明，或者一份已变更文件的清单。<command role="hg-cmd">
+        hg log</command>命令的<option role="hg-opt-global">-v</option>
+        选项（或者写成<option role="hg-opt-global">--verbose</option>）
+        能提供详细的额外信息。</para>
+
+      &interaction.tour.log-v;
+
+      <para id="x_2f">如果你既想看到一个变更的描述，也想知道变更的内容，
+        那么加上<option role="hg-opt-log">-p</option>选项（或者写成<option
+        role="hg-opt-log">--patch</option>）。这样就能用<emphasis>
+        unified diff</emphasis>格式来显示一个变更的内容，详细情况请参见
+        <xref linkend="sec:mq:patch"/></para>
+
+      &interaction.tour.log-vp;
+
+      <para id="x_67e"><option role="hg-opt-log">-p</option>选项非常
+        有用，它值得你用心记住。</para>
+
+    </sect2>
+  </sect1>
+
+  <sect1>
+    <title>谈谈命令选项</title>
+
+    <para id="x_30">让我们从Mercurial的命令中小憩一下，来看看他们的工作
+      模式，你会发现一旦了解了这些会对之后的学习大有帮助。</para>
+
+    <para id="x_31">Mercurial有一套一致并且直白的方式来处理传递给命令的
+      选项。它使用一套现今Linux和Unix系统上约定俗成的方式来处理选项。</para>
+
+    <itemizedlist>
+      <listitem>
+        <para id="x_32">每一个选项有一个长名字，比如我们曾经见过的给
+          <command role="hg-cmd">hg log</command>用的<option
+            role="hg-opt-log">--rev</option>选项。</para>
+      </listitem>
+      <listitem>
+        <para id="x_33">大多数选项有对应的短名字。我们可以使用
+          <option role="hg-opt-log">-r</option>来代替<option
+            role="hg-opt-log">--rev</option>选项。（之所有有些选项并没有
+            提供短名字，是因为那些选项非常少用。）</para>
+      </listitem>
+      <listitem>
+        <para id="x_34">长选项以两个中划线开始（比如<option role="hg-opt-log">
+            --rev</option>），而短选项则以一个中划线开始（比如<option
+	    role="hg-opt-log">-r</option>）。</para>
+      </listitem>
+      <listitem>
+        <para id="x_35">选项的命名和用法在各个命令中都是一致的。比如说，
+          每个允许你指定一个变更集ID或者版本号的命令，都接受<option
+          role="hg-opt-log">-r</option> and <option role="hg-opt-log">
+          --rev</option>选项。</para>
+      </listitem>
+      <listitem>
+        <para id="x_67f">如果你使用短选项，你可以把几个选项组合起来来
+          少打一些字。比如说，<command role="hg-cmd">hg log -v -p -r 2
+          </command>命令可以变写成<command role="hg-cmd">hg log -vpr2
+          </command>。</para>
+
+      </listitem>
+    </itemizedlist>
+
+    <para id="x_36">在本书的例子中，我通常使用短选项而不是长选项。这仅仅
+      是我个人的喜好，请不要对此做过多的猜测。</para>
+
+    <para id="x_37">如果你传入<option role="hg-opt-global">-v</option>
+      （或者是<option role="hg-opt-global">--verbose</option>）选项，
+      大部分会输出一些文本的命令会显示更多的信息，如果传入<option
+      role="hg-opt-global">-q</option>（或者<option role="hg-opt-global">
+      --quiet</option>）选项，会显示更简洁的内容。</para>
+
+    <note>
+      <title>选项命名的一致性</title>
+
+      <para id="x_680">基本上Mercurial的命令总是用一致的选项名字来表示相同
+        的概念。举例来说，如果一个命令处理变更集，那么你就永远可以通过
+        <option role="hg-opt-log">--rev</option>或<option role="hg-opt-log">
+        -r</option>选项来指定它们。这种选项用法上的一致性使得它更容易记住
+        每个选项对命令的作用。</para>
+    </note>
+
+  </sect1>
+  <sect1>
+    <title>创建变更和复核变更</title>
+
+    <para id="x_38">现在我们已经有了有能力查看Mercurial中的历史了，让我们
+      来试着创建一些变更并测试一下它们吧。</para>
+
+    <para id="x_39">首先我们要隔离我们将要进行试验的仓库。我们使用<command
+      role="hg-cmd">hg clone</command>命令来创建，不过呢，既然我们已经有
+      一个本地的复本了，就不用再从远程仓库来复制了，我们只要复制本地的那个
+      就行了。这要比通过网络复制快多了，而且本地复制通常会占用更少的空间。
+      <footnote><para id="x_681">如果源仓库和目标仓库在同一个文件系统下，
+      会节省空间，因为Mercurial会使用硬链接来对它的内部元数据做一个写入时
+      复制的共享。如果这个解释让你云里雾里的，也不要担心：所有的一切都是
+      透明且自动的，你无需理解它们。</para>
+
+    &interaction.tour.reclone;
+
+    <para id="x_3a">顺便提一下，保留一份远程仓库<quote>纯净的</quote>复本
+      通常是个不错的主意，这让你可以随时创建一个临时的复本作为每个任务的
+      沙盒。这样你可以并行的在多个任务上工作，在你完成了任务并准备把它们整
+      合回去之前，每个都是和其他隔离的。因为创建一个本地复本非常简单，这基
+      本不过让你在随时创建复本和销毁复本这件事上感到任何负担。</para>
+
+    <para id="x_3b">在我们的<filename class="directory">my-hello</filename>
+      仓库中，我们已经有了一个包含了经典的<quote>hello, world</quote>程序的
+      文件<filename>hello.c</filename>。</para>
+
+    &interaction.tour.cat1;
+
+    <para id="x_682">让我们开始编辑这个文件来让它打印第二行输出吧。</para>
+
+    &interaction.tour.cat2;
+
+    <para id="x_3c">Mercurial的<command role="hg-cmd">hg status</command>
+      命令会告诉我们Mercurial所知道的仓库里的文件有哪些。</para>
+
+    &interaction.tour.status;
+
+    <para id="x_3d"><command role="hg-cmd">hg status</command>只会在已修改的
+      文件<filename>hello.c</filename>前显示一个<quote><literal>M</literal>
+      </quote>，除非你告诉<command role="hg-cmd">hg status</command>全都打印，
+      否则它不会显示那些未被修改的文件。</para>
+      
+    <para id="x_3e"><quote><literal>M</literal></quote>标记提示我们Mercurial
+      已经注意到我们修改过<filename>hello.c</filename>文件了。我们不需要事先
+      <emphasis>通知</emphasis>Mercurial我们将会修改哪些文件，或者在我们修改
+      后通知它我们改动了哪些文件。它会自动发现这些变化的。</para>
+
+    <para id="x_3f">了解我们修改过<filename>hello.c</filename>文件确实多少对
+      我们有所帮助，但是我们更倾向于我们到底修改了<emphasis>哪些部分</emphasis>。
+      我们可以使用<command role="hg-cmd">hg diff</command>命令来完成这个操作。</para>
+
+    &interaction.tour.diff;
+
+    <tip>
+      <title>理解补丁</title>
+
+      <para id="x_683">如果你不理解上面的输出信息，记得看一眼
+        <xref linkend="sec:mq:patch"/>。</para>
+    </tip>
+  </sect1>
+  <sect1>
+    <title>在新的变更集中记录变更</title>
+
+    <para id="x_40">我们可以修改文件，构建和测试我们的变更，并且使用
+      <command role="hg-cmd">hg status</command>和<command
+      role="hg-cmd">hg diff</command>命令来复核我们的变更，当我们对我们的变更
+      满意，并且到了一个合适的时机来把我们的工作保存到一个新的变更集中。</para>
+
+    <para id="x_41"><command role="hg-cmd">hg commit</command>命令可以为我们
+      创建一个新的变更集。我们会经常使用它来<quote>做一次提交</quote>或者就说
+      <quote>提交</quote>。</para>
+
+    <sect2>
+      <title>设置一个用户名</title>
+
+      <para id="x_42">当你第一次试着执行<command role="hg-cmd">hg commit</command>
+        时，它可能会失败。Mercurial会在每次变更提交时，记录你的用户名和地址，这样
+        今后你和其他人才可以知道谁做了这些变更。Mercurial会试着自动查找合适的用户名
+        来提交变更。它通常会依次按照以下方法来查找。</para>
+      <orderedlist>
+        <listitem><para id="x_43">如果你执行<command role="hg-cmd">hg commit</command>
+          命令时指定了参数<option role="hg-opt-commit">-u</option>，然后后面跟着
+          用户名，那么它就是最高优先度的。</para></listitem>
+      <listitem><para id="x_44">如果你设置了环境变量<envar>HGUSER</envar>，它会第二个检测。
+         </para></listitem>
+
+         <listitem><para id="x_45">如果你在主目录下创建了一个<filename role="special">
+             .hgrc</filename>，里面指定了<envar role="rc-item-ui">username</envar>，
+           那么它就是会被紧接着使用。如果你想知道这个文件的详细内容，请参见<xref
+             linkend="sec:tour-basic:username"/></para></listitem>
+       <listitem><para
+           id="x_46">如果你设置了<envar>EMAIL</envar>环境变量，这会紧接着使用。
+       </para></listitem>
+       <listitem><para id="x_47">Mercurial会从你的系统中查询，找出你的本地用户名
+           和主机名，并且从中创造出一个用户名来。因为这通常会导致一个不怎么有用的
+           用户名，所以它会显示出一个警告信息来提醒用户。</para></listitem>
+      </orderedlist>
+      <para id="x_48">如果以上机制都失败了，Mercurial会提交失败，并且打印出一个错误
+        信息。事到如今，除非你设置一个用户名，否则Mercurial将拒绝你提交变更。</para>
+      <para id="x_49">你可能会想用<envar>HGUSER</envar>环境变量和<option
+        role="hg-opt-commit">-u</option>参数来<emphasis>覆盖</emphasis>Mercurial的
+        默认用户名。不过通常情况下，最简单保险的做法是为你自己创建一个<filename
+        role="special">.hgrc</filename>文件来设置你的用户名。参见下文中的详细描述。</para>
+
+      <sect3 id="sec:tour-basic:username">
+	<title>创建一个Mercurial配置文件</title>
+
+	<para id="x_4a">要想设置你的用户名，用一个你最顺手的编辑器，在你的用户主目录下
+	  创建一个叫<filename role="special">.hgrc</filename>。Mercurial会在这个文件中查找
+	  你的个性化设定。你的最初版本的<filename role="special">.hgrc</filename>文件应该
+	  想以下这个样子。</para>
+	  
+	<tip>
+	  <title>Windows中的<quote>用户主目录</quote></title>
+
+	  <para id="x_716">当我们说起用户主目录时，在一台英文版Windows下通常是在
+	    <filename>C:\Documents and Settings</filename>后面加上你的用户名这个目录下。你
+		也可以通过在命令提示符窗口中运行以下命令来查看你确切的用户主目录地址。</para>
+
+	  <screen><prompt>C:\></prompt> <userinput>echo %UserProfile%</userinput></screen>
+	</tip>
+
+	<programlisting># 我是Mercurial配置文件。
+[ui]
+username = Firstname Lastname &lt;email.address@example.net&gt;</programlisting>
+
+	<para id="x_4b">配置文件中以<quote><literal>[ui]</literal></quote>行开始的<emphasis>
+	  段落</emphasis>中，你可以看到<quote><literal>username = ...</literal></quote>
+	  这样的行，就是用来<quote>设置<literal>用户名</literal>的。一个段落会持续到一个
+	  新段落的开始，或者是到了文件末尾。Mercurial会忽略空行，并且把所有<quote><literal>
+	  #</literal></quote>开始到行尾的文本作为注释。</para>
+      </sect3>
+
+      <sect3>
+	<title>选择一个用户名</title>
+
+	<para id="x_4c">你可以使用任何你希望的文本作为你的<literal>用户名</literal>项的值，
+	  因为这个信息只是用来给其他人看的，而不是供Mercurial解释。大多数人都遵从这样一个
+	  习惯，就是用他们的名字再加上他们的邮件地址，就像上面例子中所写的一样。</para>
+
+	<note>
+	  <para id="x_4d">Mercurial内置的Web服务器会混淆一下邮件地址，让它们更难被垃圾邮件商
+	    的email收集工具收集到。这可以在你在Web上发布了一个Mercurial仓库后，减少一些垃圾
+		邮件。</para></note>
+      </sect3>
+    </sect2>
+    <sect2>
+      <title>编写提交信息</title>
+
+      <para id="x_4e">当我们提交一个变更时，Mercurial会帮我们打开一个文本编辑器，让我们
+    输入本次改动的描述信息。这个叫做<emphasis>提交信息</emphasis>。它将让其他读者得以知道
+    我们改动了什么，以及我们为什么要改动，一旦提交完成后，它将在<command role="hg-cmd">
+      hg log</command>命令执行时显示出来。</para>
+
+       &interaction.tour.commit;
+
+     <para id="x_4f"><command role="hg-cmd">hg
+         commit</command>命令打开的编辑器里会还有一行或两行空白行，紧接着
+	 是<quote><literal>HG:</literal></quote>.</para>
+
+    <programlisting>
+这是我输入提交注释的地方。
+
+HG: Enter commit message.  Lines beginning with 'HG:' are removed.
+HG: --
+HG: user: Bryan O'Sullivan &lt;bos@serpentine.com&gt;
+HG: branch 'default'
+HG: changed hello.c</programlisting>
+
+    <para id="x_50">Mercurial ignores the lines that start with
+	<quote><literal>HG:</literal></quote>; it uses them only to
+	tell us which files it's recording changes to.  Modifying or
+	deleting these lines has no effect.</para>
+    </sect2>
+    <sect2>
+      <title>Writing a good commit message</title>
+
+      <para id="x_51">Since <command role="hg-cmd">hg log</command>
+	only prints the first line of a commit message by default,
+	it's best to write a commit message whose first line stands
+	alone.  Here's a real example of a commit message that
+	<emphasis>doesn't</emphasis> follow this guideline, and hence
+	has a summary that is not readable.</para>
+
+      <programlisting>
+changeset:   73:584af0e231be
+user:        Censored Person &lt;censored.person@example.org&gt;
+date:        Tue Sep 26 21:37:07 2006 -0700
+summary:     include buildmeister/commondefs. Add exports.</programlisting>
+
+      <para id="x_52">As far as the remainder of the contents of the
+	commit message are concerned, there are no hard-and-fast
+	rules.  Mercurial itself doesn't interpret or care about the
+	contents of the commit message, though your project may have
+	policies that dictate a certain kind of formatting.</para>
+      <para id="x_53">My personal preference is for short, but
+	informative, commit messages that tell me something that I
+	can't figure out with a quick glance at the output of <command
+	  role="hg-cmd">hg log --patch</command>.</para>
+      <para id="x_55">If we run the <command role="hg-cmd">hg
+	  commit</command> command without any arguments, it records
+	all of the changes we've made, as reported by <command
+	  role="hg-cmd">hg status</command> and <command
+	  role="hg-cmd">hg diff</command>.</para>
+
+      <note>
+	<title>A surprise for Subversion users</title>
+
+	<para id="x_717">Like other Mercurial commands, if we don't supply
+	  explicit names to commit to the <command role="hg-cmd">hg
+	    commit</command>, it will operate across a repository's
+	  entire working directory.  Be wary of this if you're coming
+	  from the Subversion or CVS world, since you might expect it
+	  to operate only on the current directory that you happen to
+	  be visiting and its subdirectories.</para>
+      </note>
+    </sect2>
+
+    <sect2>
+      <title>Aborting a commit</title>
+
+      <para id="x_54">If you decide that you don't want to commit
+	while in the middle of editing a commit message, simply exit
+	from your editor without saving the file that it's editing.
+	This will cause nothing to happen to either the repository or
+	the working directory.</para>
+    </sect2>
+
+    <sect2>
+      <title>Admiring our new handiwork</title>
+
+      <para id="x_56">Once we've finished the commit, we can use the
+	<command role="hg-cmd">hg tip</command> command to display the
+	changeset we just created.  This command produces output that
+	is identical to <command role="hg-cmd">hg log</command>, but
+	it only displays the newest revision in the repository.</para>
+
+      &interaction.tour.tip;
+
+      <para id="x_57">We refer to the newest revision in the
+	repository as the <emphasis>tip revision</emphasis>, or simply
+	the <emphasis>tip</emphasis>.</para>
+
+      <para id="x_684">By the way, the <command role="hg-cmd">hg tip</command>
+	command accepts many of the same options as <command
+	  role="hg-cmd">hg log</command>, so <option
+	  role="hg-opt-global">-v</option> above indicates <quote>be
+	  verbose</quote>, <option role="hg-opt-tip">-p</option>
+	specifies <quote>print a patch</quote>.  The use of <option
+	  role="hg-opt-tip">-p</option> to print patches is another
+	example of the consistent naming we mentioned earlier.</para>
+    </sect2>
+  </sect1>
+
+  <sect1>
+    <title>Sharing changes</title>
+
+    <para id="x_58">We mentioned earlier that repositories in
+      Mercurial are self-contained.  This means that the changeset we
+      just created exists only in our <filename
+	class="directory">my-hello</filename> repository.  Let's look
+      at a few ways that we can propagate this change into other
+      repositories.</para>
+
+    <sect2 id="sec:tour:pull">
+      <title>Pulling changes from another repository</title>
+
+      <para id="x_59">To get started, let's clone our original
+	<filename class="directory">hello</filename> repository, which
+	does not contain the change we just committed.  We'll call our
+	temporary repository <filename
+	  class="directory">hello-pull</filename>.</para>
+
+      &interaction.tour.clone-pull;
+
+      <para id="x_5a">We'll use the <command role="hg-cmd">hg
+	  pull</command> command to bring changes from <filename
+	  class="directory">my-hello</filename> into <filename
+	  class="directory">hello-pull</filename>.  However, blindly
+	pulling unknown changes into a repository is a somewhat scary
+	prospect.  Mercurial provides the <command role="hg-cmd">hg
+	  incoming</command> command to tell us what changes the
+	<command role="hg-cmd">hg pull</command> command
+	<emphasis>would</emphasis> pull into the repository, without
+	actually pulling the changes in.</para>
+
+      &interaction.tour.incoming;
+
+      <para id="x_5c">Bringing changes into a repository is a simple
+	matter of running the <command role="hg-cmd">hg pull</command>
+	command, and optionally telling it which repository to pull from.</para>
+
+      &interaction.tour.pull;
+
+      <para id="x_5d">As you can see from the before-and-after output
+	of <command role="hg-cmd">hg tip</command>, we have
+	successfully pulled changes into our repository.  However,
+	Mercurial separates pulling changes in from updating the
+	working directory. There remains one step before we will see
+	the changes that we just pulled appear in the working
+	directory.</para>
+
+      <tip>
+	<title>Pulling specific changes</title>
+
+	<para id="x_5b">It is possible that due to the delay between
+	  running <command role="hg-cmd">hg incoming</command> and
+	  <command role="hg-cmd">hg pull</command>, you may not see
+	  all changesets that will be brought from the other
+	  repository. Suppose you're pulling changes from a repository
+	  on the network somewhere. While you are looking at the
+	  <command role="hg-cmd">hg incoming</command> output, and
+	  before you pull those changes, someone might have committed
+	  something in the remote repository. This means that it's
+	  possible to pull more changes than you saw when using
+	  <command role="hg-cmd">hg incoming</command>.</para>
+
+	<para id="x_718">If you only want to pull precisely the changes that were
+	  listed by <command role="hg-cmd">hg incoming</command>, or
+	  you have some other reason to pull a subset of changes,
+	  simply identify the change that you want to pull by its
+	  changeset ID, e.g. <command>hg pull
+	    -r7e95bb</command>.</para>
+      </tip>
+    </sect2>
+
+    <sect2>
+      <title>Updating the working directory</title>
+
+      <para id="x_5e">We have so far glossed over the relationship
+	between a repository and its working directory.  The <command
+	  role="hg-cmd">hg pull</command> command that we ran in
+	<xref linkend="sec:tour:pull"/> brought changes into the
+	repository, but if we check, there's no sign of those changes
+	in the working directory.  This is because <command
+	  role="hg-cmd">hg pull</command> does not (by default) touch
+	the working directory.  Instead, we use the <command
+	  role="hg-cmd">hg update</command> command to do this.</para>
+
+      &interaction.tour.update;
+
+      <para id="x_5f">It might seem a bit strange that <command
+	  role="hg-cmd">hg pull</command> doesn't update the working
+	directory automatically.  There's actually a good reason for
+	this: you can use <command role="hg-cmd">hg update</command>
+	to update the working directory to the state it was in at
+	<emphasis>any revision</emphasis> in the history of the
+	repository.  If you had the working directory updated to an
+	old revision&emdash;to hunt down the origin of a bug,
+	say&emdash;and ran a <command role="hg-cmd">hg pull</command>
+	which automatically updated the working directory to a new
+	revision, you might not be terribly happy.</para>
+
+      <para id="x_60">Since pull-then-update is such a common sequence
+	of operations, Mercurial lets you combine the two by passing
+	the <option role="hg-opt-pull">-u</option> option to <command
+	  role="hg-cmd">hg pull</command>.</para>
+
+      <para id="x_61">If you look back at the output of <command
+	  role="hg-cmd">hg pull</command> in <xref
+	    linkend="sec:tour:pull"/> when we ran it without <option
+	  role="hg-opt-pull">-u</option>, you can see that it printed
+	a helpful reminder that we'd have to take an explicit step to
+	update the working directory.</para>
+
+      <para id="x_62">To find out what revision the working directory
+	is at, use the <command role="hg-cmd">hg parents</command>
+	command.</para>
+
+      &interaction.tour.parents;
+
+      <para id="x_63">If you look back at <xref
+	  linkend="fig:tour-basic:history"/>, you'll see arrows
+	connecting each changeset.  The node that the arrow leads
+	<emphasis>from</emphasis> in each case is a parent, and the
+	node that the arrow leads <emphasis>to</emphasis> is its
+	child.  The working directory has a parent in just the same
+	way; this is the changeset that the working directory
+	currently contains.</para>
+
+      <para id="x_64">To update the working directory to a particular
+	revision, give a revision number or changeset ID to the
+	<command role="hg-cmd">hg update</command> command.</para>
+
+      &interaction.tour.older;
+
+      <para id="x_65">If you omit an explicit revision, <command
+	  role="hg-cmd">hg update</command> will update to the tip
+	revision, as shown by the second call to <command
+	  role="hg-cmd">hg update</command> in the example
+	above.</para>
+    </sect2>
+
+    <sect2>
+      <title>Pushing changes to another repository</title>
+
+      <para id="x_66">Mercurial lets us push changes to another
+	repository, from the repository we're currently visiting. As
+	with the example of <command role="hg-cmd">hg pull</command>
+	above, we'll create a temporary repository to push our changes
+	into.</para>
+
+      &interaction.tour.clone-push;
+
+      <para id="x_67">The <command role="hg-cmd">hg outgoing</command>
+	command tells us what changes would be pushed into another
+	repository.</para>
+
+      &interaction.tour.outgoing;
+
+      <para id="x_68">And the <command role="hg-cmd">hg push</command>
+	command does the actual push.</para>
+
+      &interaction.tour.push;
+
+      <para id="x_69">As with <command role="hg-cmd">hg
+	  pull</command>, the <command role="hg-cmd">hg push</command>
+	command does not update the working directory in the
+	repository that it's pushing changes into. Unlike <command
+	  role="hg-cmd">hg pull</command>, <command role="hg-cmd">hg
+	  push</command> does not provide a <literal>-u</literal>
+	option that updates the other repository's working directory.
+	This asymmetry is deliberate: the repository we're pushing to
+	might be on a remote server and shared between several people.
+	If we were to update its working directory while someone was
+	working in it, their work would be disrupted.</para>
+
+      <para id="x_6a">What happens if we try to pull or push changes
+	  and the receiving repository already has those changes?
+	  Nothing too exciting.</para>
+
+      &interaction.tour.push.nothing;
+    </sect2>
+
+    <sect2>
+      <title>Default locations</title>
+
+      <para id="x_719">When we clone a repository, Mercurial records the location
+	of the repository we cloned in the
+	<filename>.hg/hgrc</filename> file of the new repository.  If
+	we don't supply a location to <command>hg pull</command> from
+	or <command>hg push</command> to, those commands will use this
+	location as a default.  The <command>hg incoming</command>
+	and <command>hg outgoing</command> commands do so too.</para>
+
+      <para id="x_71a">If you open a repository's <filename>.hg/hgrc</filename>
+	file in a text editor, you will see contents like the
+	following.</para>
+
+      <programlisting>[paths]
+default = http://www.selenic.com/repo/hg</programlisting>
+
+      <para id="x_71b">It is possible&emdash;and often useful&emdash;to have the
+	default location for <command>hg push</command> and
+	<command>hg outgoing</command> be different from those for
+	<command>hg pull</command> and <command>hg incoming</command>.
+	We can do this by adding a <literal>default-push</literal>
+	entry to the <literal>[paths]</literal> section of the
+	<filename>.hg/hgrc</filename> file, as follows.</para>
+
+      <programlisting>[paths]
+default = http://www.selenic.com/repo/hg
+default-push = http://hg.example.com/hg</programlisting>
+    </sect2>
+
+    <sect2>
+      <title>Sharing changes over a network</title>
+
+      <para id="x_6b">The commands we have covered in the previous few
+	  sections are not limited to working with local repositories.
+	  Each works in exactly the same fashion over a network
+	  connection; simply pass in a URL instead of a local
+	  path.</para>
+	
+      &interaction.tour.outgoing.net;
+
+      <para id="x_6c">In this example, we can see what changes we
+	could push to the remote repository, but the repository is
+	understandably not set up to let anonymous users push to
+	it.</para>
+
+      &interaction.tour.push.net;
+    </sect2>
+  </sect1>
+
+  <sect1>
+    <title>Starting a new project</title>
+
+    <para id="x_71c">It is just as easy to begin a new project as to work on one
+      that already exists.  The <command>hg init</command> command
+      creates a new, empty Mercurial repository.</para>
+
+    &interaction.ch01-new.init;
+
+    <para id="x_71d">This simply creates a repository named
+      <filename>myproject</filename> in the current directory.</para>
+
+    &interaction.ch01-new.ls;
+
+    <para id="x_71e">We can tell that <filename>myproject</filename> is a
+      Mercurial repository, because it contains a
+      <filename>.hg</filename> directory.</para>
+
+    &interaction.ch01-new.ls2;
+
+    <para id="x_71f">If we want to add some pre-existing files to the repository,
+      we copy them into place, and tell Mercurial to start tracking
+      them using the <command>hg add</command> command.</para>
+
+    &interaction.ch01-new.add;
+
+    <para id="x_720">Once we are satisfied that our project looks right, we
+      commit our changes.</para>
+
+    &interaction.ch01-new.commit;
+
+    <para id="x_721">It takes just a few moments to start using Mercurial on a
+      new project, which is part of its appeal. Revision control is
+      now so easy to work with, we can use it on the smallest of
+      projects that we might not have considered with a more
+      complicated tool.</para>
+  </sect1>
+</chapter>
+
+<!--
+local variables: 
+sgml-parent-document: ("00book.xml" "book" "chapter")
+end:
+-->
