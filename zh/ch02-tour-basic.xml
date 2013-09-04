@@ -534,26 +534,24 @@ username = Firstname Lastname &lt;email.address@example.net&gt;</programlisting>
     <programlisting>
 这是我输入提交注释的地方。
 
-HG: Enter commit message.  Lines beginning with 'HG:' are removed.
+HG: 输入提交信息。  以'HG:'开始的行会被删除。
 HG: --
-HG: user: Bryan O'Sullivan &lt;bos@serpentine.com&gt;
-HG: branch 'default'
-HG: changed hello.c</programlisting>
+HG: 用户: Bryan O'Sullivan &lt;bos@serpentine.com&gt;
+HG: 分支 'default'
+HG: hello.c被改变了。</programlisting>
 
-    <para id="x_50">Mercurial ignores the lines that start with
-	<quote><literal>HG:</literal></quote>; it uses them only to
-	tell us which files it's recording changes to.  Modifying or
-	deleting these lines has no effect.</para>
+    <para id="x_50">Mercurial忽略以<quote><literal>HG:</literal></quote>
+      开始的行；它仅仅是用来告诉我们哪些它记录的文件已经被修改了。更新
+      或者删除这些行是不会产生影响的。</para>
+      ignores the lines that start with
     </sect2>
     <sect2>
-      <title>Writing a good commit message</title>
+      <title>写良好的提交信息</title>
 
-      <para id="x_51">Since <command role="hg-cmd">hg log</command>
-	only prints the first line of a commit message by default,
-	it's best to write a commit message whose first line stands
-	alone.  Here's a real example of a commit message that
-	<emphasis>doesn't</emphasis> follow this guideline, and hence
-	has a summary that is not readable.</para>
+      <para id="x_51">因为<command role="hg-cmd">hg log</command>默认只打印
+        每次提交信息的第一行，所以最好第一行是一个独立简洁的描述。下面是
+        一个<emphasis>不遵循</emphasis>这个规则的反面实例，所以这个信息是不
+        可读的。</para>
 
       <programlisting>
 changeset:   73:584af0e231be
